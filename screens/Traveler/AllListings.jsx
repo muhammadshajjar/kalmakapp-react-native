@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from "react-native";
 import React from "react";
-import ListingItem from "../componets/ListingItem";
+import ListingItem from "../../componets/ListingItem";
 
 const AllListings = ({ navigation }) => {
   return (

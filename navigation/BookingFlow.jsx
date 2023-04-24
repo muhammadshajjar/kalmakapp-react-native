@@ -2,9 +2,9 @@ import React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import TravelerHome from "../screens/TravelerHome";
-import ListingDetail from "../screens/ListingDetail";
-import AllListings from "../screens/AllListings";
+import TravelerHome from "../screens/Traveler/TravelerHome";
+import ListingDetail from "../screens/Traveler/ListingDetail";
+import AllListings from "../screens/Traveler/AllListings";
 
 const Stack = createNativeStackNavigator();
 

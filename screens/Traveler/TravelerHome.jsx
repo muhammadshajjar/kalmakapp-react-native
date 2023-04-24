@@ -12,9 +12,9 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { COLORS } from "../constants";
-import HomeHeading from "../componets/HomeHeading";
-import ListingItem from "../componets/ListingItem";
+import { COLORS } from "../../constants";
+import HomeHeading from "../../componets/HomeHeading";
+import ListingItem from "../../componets/ListingItem";
 
 const TravelerHome = ({ navigation }) => {
   return (

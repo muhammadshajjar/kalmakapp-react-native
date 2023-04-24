@@ -7,7 +7,7 @@ import AuthStack from "./navigation/AuthStack";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import TravelerFlow from "./navigation/TravelerFlow";
-
+import HostFlow from "./navigation/HostFlow";
 export default function App() {
   const [fontsLoaded] = useFonts({
     "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),

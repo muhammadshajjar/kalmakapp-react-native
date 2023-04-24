@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -6,10 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 
 import TravelerWishList from "../screens/Traveler/TravelerWishList";
-// import TravelerHome from "../screens/TravelerHome";
 import TravelerBooked from "../screens/Traveler/TravelerBooked";
 import TravelerProfile from "../screens/Traveler/TravelerProfile";
 import TravelerInbox from "../screens/Traveler/TravelerInbox";
+
 import BookingFlow from "./BookingFlow";
 import { COLORS } from "../constants";
 
