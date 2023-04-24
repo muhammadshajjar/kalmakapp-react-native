@@ -65,13 +65,13 @@ const TravelerHome = ({ navigation }) => {
       />
       <View style={styles.listings}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{ marginRight: 15 }}>
+          <View style={{ marginRight: 15, width: 210 }}>
             <ListingItem navigation={navigation} />
           </View>
-          <View style={{ marginRight: 15 }}>
+          <View style={{ marginRight: 15, width: 210 }}>
             <ListingItem navigation={navigation} />
           </View>
-          <View style={{ marginRight: 15 }}>
+          <View style={{ marginRight: 15, width: 210 }}>
             <ListingItem navigation={navigation} />
           </View>
         </ScrollView>

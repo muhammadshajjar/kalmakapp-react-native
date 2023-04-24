@@ -6,7 +6,7 @@ import AuthStack from "./navigation/AuthStack";
 
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
-import TravelerView from "./navigation/TravelerView";
+import TravelerFlow from "./navigation/TravelerFlow";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -21,5 +21,5 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  return <TravelerView />;
+  return <TravelerFlow />;
 }

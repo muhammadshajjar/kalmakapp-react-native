@@ -17,7 +17,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const TravelerView = () => {
+const TravelerFlow = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -92,4 +92,4 @@ const TravelerView = () => {
   );
 };
 
-export default TravelerView;
+export default TravelerFlow;

@@ -10,12 +10,12 @@ import React from "react";
 import { COLORS } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
-const ListingItem = ({ navigation }) => {
+const ListingItem = ({ navigation, flag = false }) => {
   return (
     <View style={styles.listCotainer}>
-      <View>
+      <View style={{ height: flag ? 200 : 120 }}>
         <Image
-          style={{ width: "100%" }}
+          style={{ width: "100%", height: "100%" }}
           source={require("../assets/images/listingdummyimage.png")}
         />
       </View>
@@ -74,7 +74,9 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     padding: 8,
     borderRadius: 15,
-    width: 210,
+    width: "100%",
+    backgroundColor: "white",
+    marginVertical: 10,
   },
   listInfoContainer: {
     padding: 10,
