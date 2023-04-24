@@ -12,10 +12,19 @@ const ManageListingFlow = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ManageListing" component={ManageListings} />
+        <Stack.Screen
+          name="ManageListing"
+          component={ManageListings}
+          options={{
+            title: "Manage Listing",
+          }}
+        />
         <Stack.Screen
           name="CreateNewListing"
           component={CreateNewListingFlow}
+          options={{
+            title: "Create New Listing",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
