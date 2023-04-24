@@ -5,17 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
-import TravelerWishList from "../screens/TravelerWishList";
-import TravelerHome from "../screens/TravelerHome";
-import TravelerBooked from "../screens/TravelerBooked";
-import TravelerProfile from "../screens/TravelerProfile";
-import TravelerInbox from "../screens/TravelerInbox";
+import TravelerWishList from "../screens/Traveler/TravelerWishList";
+// import TravelerHome from "../screens/TravelerHome";
+import TravelerBooked from "../screens/Traveler/TravelerBooked";
+import TravelerProfile from "../screens/Traveler/TravelerProfile";
+import TravelerInbox from "../screens/Traveler/TravelerInbox";
 import BookingFlow from "./BookingFlow";
 import { COLORS } from "../constants";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 const TravelerFlow = () => {
   return (

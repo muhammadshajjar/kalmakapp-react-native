@@ -1,8 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import ProfileHeader from "../componets/ProfileHeader";
-
+import ProfileHeader from "../../componets/ProfileHeader";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../constants";
 
