@@ -2,10 +2,17 @@ import { View, Text, StyleSheet, Switch } from "react-native";
 import React, { useState } from "react";
 import { COLORS } from "../constants";
 import { Entypo } from "@expo/vector-icons";
+import { useContext } from "react";
+import { AuthContext } from "../store/auth-context";
 
 const ProfileHeader = ({ userName, mode }) => {
+  const authCtx = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const toggleSwitch = () => {
+    authCtx.toggleModeHandler();
+    setIsEnabled((previousState) => !previousState);
+  };
   return (
     <>
       <View style={styles.container}>

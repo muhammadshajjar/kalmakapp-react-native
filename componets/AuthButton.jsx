@@ -1,9 +1,9 @@
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 
 import { COLORS } from "../constants";
 
-const AuthButton = ({ label }) => {
+const AuthButton = ({ label, onAuthenticate }) => {
   return (
     <TouchableOpacity
       style={{
@@ -12,23 +12,21 @@ const AuthButton = ({ label }) => {
         paddingVertical: 17,
         marginTop: 20,
       }}
-      onPress={() => {
-        //clicked to next page
-      }}
+      onPress={() => onAuthenticate()}
     >
-      <Text
-        style={{
-          textAlign: "center",
-          fontFamily: "Montserrat-SemiBold",
-          fontSize: 18,
-          letterSpacing: 1,
-          color: "#fff",
-        }}
-      >
-        {label}
-      </Text>
+      <Text style={styles.btnContainer}>{label}</Text>
     </TouchableOpacity>
   );
 };
 
 export default AuthButton;
+
+const styles = StyleSheet.create({
+  btnContainer: {
+    textAlign: "center",
+    fontFamily: "Montserrat-SemiBold",
+    fontSize: 18,
+    letterSpacing: 1,
+    color: "#fff",
+  },
+});

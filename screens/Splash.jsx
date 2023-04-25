@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
+
 import React from "react";
 import { COLORS } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
@@ -25,8 +26,8 @@ const Splash = ({ navigation }) => {
       </SafeAreaView>
       <View style={styles.container}>
         <Text style={styles.heroText}>
-          FIND {"\n"}
-          <Text style={styles.heroTextBold}>YOUR NEXT ADVENTURE SPOT</Text>
+          find {"\n"}
+          <Text style={styles.heroTextBold}>your next adventure spot</Text>
         </Text>
 
         <TouchableOpacity
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontFamily: "Montserrat-Regular",
     color: "white",
+    textTransform: "uppercase",
   },
   heroTextBold: {
     fontFamily: "Montserrat-ExtraBold",

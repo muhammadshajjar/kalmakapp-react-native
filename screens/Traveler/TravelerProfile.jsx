@@ -3,8 +3,11 @@ import React from "react";
 import ProfileHeader from "../../componets/ProfileHeader";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
+import { useContext } from "react";
+import { AuthContext } from "../../store/auth-context";
 
 const TravelerProfile = () => {
+  const authCtx = useContext(AuthContext);
   return (
     <>
       <ProfileHeader userName="Zeeshan Hero" mode="host" />
@@ -28,9 +31,11 @@ const TravelerProfile = () => {
               color={COLORS.iconsLightGrey}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.settingList}>
+          <TouchableOpacity
+            style={styles.settingList}
+            onPress={() => authCtx.logout()}
+          >
             <Text style={styles.settingListTxt}>Logout</Text>
-
             <AntDesign
               name="arrowright"
               size={24}

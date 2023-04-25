@@ -17,6 +17,9 @@ import AuthInput from "../componets/AuthInput";
 import AuthButton from "../componets/AuthButton";
 
 const Signup = ({ navigation }) => {
+  const signUpHandler = () => {
+    navigation.goBack();
+  };
   return (
     <SafeAreaView>
       <ScrollView>
@@ -74,7 +77,7 @@ const Signup = ({ navigation }) => {
             keyboardType="email-address"
             inputType="password"
           />
-          <AuthButton label={"Signup"} />
+          <AuthButton label={"Signup"} onAuthenticate={signUpHandler} />
           <View
             style={{
               flexDirection: "row",

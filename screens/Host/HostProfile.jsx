@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import ProfileHeader from "../../componets/ProfileHeader";
 import { COLORS } from "../../constants";
-
 import { AntDesign } from "@expo/vector-icons";
+import { AuthContext } from "../../store/auth-context";
 
 const HostProfile = ({ navigation }) => {
+  const authCtx = useContext(AuthContext);
   return (
     <>
       <ProfileHeader userName="Zeeshan Hero" mode="guest" />
@@ -62,7 +63,10 @@ const HostProfile = ({ navigation }) => {
               color={COLORS.iconsLightGrey}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.settingList}>
+          <TouchableOpacity
+            style={styles.settingList}
+            onPress={() => authCtx.logout()}
+          >
             <Text style={styles.settingListTxt}>Logout</Text>
 
             <AntDesign

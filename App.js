@@ -1,15 +1,31 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Login from "./screens/Login";
-import Signup from "./screens/Signup";
+import React, { useContext } from "react";
 import AuthStack from "./navigation/AuthStack";
 
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import TravelerFlow from "./navigation/TravelerFlow";
 import HostFlow from "./navigation/HostFlow";
-import CreateNewListingFlow from "./navigation/CreateNewListingFlow";
-import ManageListingFlow from "./navigation/ManageListingFlow";
+
+import AuthContextProvider from "./store/auth-context";
+
+import { AuthContext } from "./store/auth-context";
+
+const Navigation = () => {
+  const authCtx = useContext(AuthContext);
+  let flowToShow;
+  if (authCtx.mode === "traveler") {
+    flowToShow = <TravelerFlow />;
+  } else {
+    flowToShow = <HostFlow />;
+  }
+  return (
+    <>
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && flowToShow}
+    </>
+  );
+};
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
@@ -23,5 +39,10 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  return <TravelerFlow />;
+
+  return (
+    <AuthContextProvider>
+      <Navigation />
+    </AuthContextProvider>
+  );
 }

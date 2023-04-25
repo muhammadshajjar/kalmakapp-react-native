@@ -45,9 +45,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     columnGap: 20,
     alignSelf: "flex-end",
-    // position: "absolute",
-    // right: 15,
-    // bottom: 15,
   },
   btnContainer: {
     height: 60,

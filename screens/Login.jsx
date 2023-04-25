@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,8 +13,15 @@ import { COLORS } from "../constants";
 import SocialMediaAuth from "../componets/SocialMediaAuth";
 import AuthButton from "../componets/AuthButton";
 import AuthInput from "../componets/AuthInput";
+import { AuthContext } from "../store/auth-context";
 
 const Login = ({ navigation }) => {
+  const authCtx = useContext(AuthContext);
+
+  const loginHandler = () => {
+    authCtx.authenticate("loksjfasdf");
+  };
+
   return (
     <SafeAreaView>
       <Image
@@ -57,7 +64,7 @@ const Login = ({ navigation }) => {
             Forgot?
           </Text>
         </TouchableOpacity>
-        <AuthButton label="Login" />
+        <AuthButton label="Login" onAuthenticate={loginHandler} />
         <Text
           style={{
             textAlign: "center",
