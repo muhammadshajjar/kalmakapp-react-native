@@ -20,7 +20,7 @@ const Splash = ({ navigation }) => {
     >
       <SafeAreaView>
         <Image
-          style={{ margin: 15 }}
+          style={{ marginTop: 40, marginLeft: 15 }}
           source={require("../assets/images/kalmaklogo.png")}
         />
       </SafeAreaView>

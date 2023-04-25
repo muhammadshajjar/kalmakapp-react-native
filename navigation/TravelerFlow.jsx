@@ -22,18 +22,16 @@ const TravelerFlow = () => {
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: COLORS.primaryGreen,
+          tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            position: "absolute",
+            borderRadius: 50,
+            height: 70,
+            paddingTop: 15,
+            paddingBottom: 15,
+          },
         }}
       >
-        {/* <Tab.Screen
-          name="THome"
-          component={TravelerHome}
-          options={{
-            tabBarLabel: "Home",
-            tabBarIcon: ({ color, size }) => (
-              <AntDesign name="home" size={size} color={color} />
-            ),
-          }}
-        /> */}
         <Tab.Screen
           name="Home"
           component={BookingFlow}

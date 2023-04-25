@@ -10,11 +10,20 @@ import CreateNewListingFlow from "./CreateNewListingFlow";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 const HostProfileFlow = ({ navigation, route }) => {
   const tabHiddenRoutes = ["ManageListing", "CreateNewListing"];
+
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({ tabBarStyle: { display: "none" } });
     } else {
-      navigation.setOptions({ tabBarStyle: { display: "flex" } });
+      navigation.setOptions({
+        tabBarStyle: {
+          position: "absolute",
+          borderRadius: 50,
+          height: 70,
+          paddingTop: 15,
+          paddingBottom: 15,
+        },
+      });
     }
   }, [navigation, route]);
   return (

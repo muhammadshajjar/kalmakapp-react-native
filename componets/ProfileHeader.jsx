@@ -71,9 +71,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 8,
-    marginTop: -25,
+    marginTop: -28,
   },
   modeTxt: {
     fontSize: 17,

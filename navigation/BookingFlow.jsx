@@ -15,7 +15,15 @@ const BookingFlow = ({ navigation, route }) => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({ tabBarStyle: { display: "none" } });
     } else {
-      navigation.setOptions({ tabBarStyle: { display: "flex" } });
+      navigation.setOptions({
+        tabBarStyle: {
+          position: "absolute",
+          borderRadius: 50,
+          height: 70,
+          paddingTop: 15,
+          paddingBottom: 15,
+        },
+      });
     }
   }, [navigation, route]);
 
@@ -23,7 +31,9 @@ const BookingFlow = ({ navigation, route }) => {
     <Stack.Navigator>
       <Stack.Screen
         name="THome"
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
         component={TravelerHome}
       />
       <Stack.Screen name="ListingDetail" component={ListingDetail} />

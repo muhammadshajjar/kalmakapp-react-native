@@ -12,7 +12,7 @@ import { AuthContext } from "./store/auth-context";
 
 const Navigation = () => {
   const authCtx = useContext(AuthContext);
-  let flowToShow;
+  let flowToShow; //their are two flows one for host and one for travelers show the screen according to the user
   if (authCtx.mode === "traveler") {
     flowToShow = <TravelerFlow />;
   } else {

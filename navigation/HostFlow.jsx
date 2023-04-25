@@ -22,6 +22,13 @@ const HostFlow = () => {
         screenOptions={{
           headerShown: false,
           tabBarActiveTintColor: COLORS.primaryGreen,
+          tabBarStyle: {
+            position: "absolute",
+            borderRadius: 50,
+            height: 70,
+            paddingTop: 15,
+            paddingBottom: 15,
+          },
         }}
       >
         <Tab.Screen
