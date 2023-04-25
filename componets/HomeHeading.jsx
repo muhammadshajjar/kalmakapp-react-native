@@ -6,7 +6,7 @@ const HomeHeading = ({ headingText, btnText, navigation }) => {
   return (
     <View style={styles.headingContainer}>
       <Text style={styles.headingText}>{headingText}</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("All Listings")}>
+      <TouchableOpacity onPress={() => navigation.navigate("AllListings")}>
         <Text style={styles.btnText}>{btnText}</Text>
       </TouchableOpacity>
     </View>

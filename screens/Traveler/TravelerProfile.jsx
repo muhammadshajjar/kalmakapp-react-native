@@ -7,13 +7,12 @@ import { COLORS } from "../../constants";
 const TravelerProfile = () => {
   return (
     <>
-      <ProfileHeader />
+      <ProfileHeader userName="Zeeshan Hero" mode="host" />
       <View style={styles.contentContainer}>
         <Text style={styles.heading}>Settings</Text>
         <View>
           <TouchableOpacity style={styles.settingList}>
             <Text style={styles.settingListTxt}>Prefereces</Text>
-
             <AntDesign
               name="arrowright"
               size={24}

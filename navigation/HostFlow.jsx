@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
+import HostProfileFlow from "../navigation/HostProfileFlow";
 
 const HostFlow = () => {
   return (
@@ -59,7 +60,7 @@ const HostFlow = () => {
         />
         <Tab.Screen
           name="HProfile"
-          component={HostProfile}
+          component={HostProfileFlow}
           options={{
             tabBarLabel: "Profile",
             tabBarIcon: ({ color, size }) => (

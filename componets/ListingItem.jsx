@@ -52,7 +52,9 @@ const ListingItem = ({ navigation, flag = false }) => {
               /Night
             </Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate("LDetail")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("ListingDetail")}
+          >
             <AntDesign
               name="arrowright"
               size={24}

@@ -7,8 +7,18 @@ import ListingDetail from "../screens/Traveler/ListingDetail";
 import AllListings from "../screens/Traveler/AllListings";
 
 const Stack = createNativeStackNavigator();
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
-const BookingFlow = () => {
+const BookingFlow = ({ navigation, route }) => {
+  const tabHiddenRoutes = ["ListingDetail", "AllListings"];
+  React.useLayoutEffect(() => {
+    if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
+      navigation.setOptions({ tabBarStyle: { display: "none" } });
+    } else {
+      navigation.setOptions({ tabBarStyle: { display: "flex" } });
+    }
+  }, [navigation, route]);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -16,8 +26,14 @@ const BookingFlow = () => {
         options={{ headerShown: false }}
         component={TravelerHome}
       />
-      <Stack.Screen name="LDetail" component={ListingDetail} />
-      <Stack.Screen name="All Listings" component={AllListings} />
+      <Stack.Screen name="ListingDetail" component={ListingDetail} />
+      <Stack.Screen
+        name="AllListings"
+        component={AllListings}
+        options={{
+          headerTitle: "All Listings",
+        }}
+      />
     </Stack.Navigator>
   );
 };

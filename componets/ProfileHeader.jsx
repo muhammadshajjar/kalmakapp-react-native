@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, Switch } from "react-native";
+import React, { useState } from "react";
 import { COLORS } from "../constants";
 import { Entypo } from "@expo/vector-icons";
 
-const ProfileHeader = () => {
+const ProfileHeader = ({ userName, mode }) => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   return (
     <>
       <View style={styles.container}>
@@ -11,14 +13,18 @@ const ProfileHeader = () => {
           <View style={styles.profileImg}>
             <Entypo name="user" size={24} color={COLORS.iconsLightGrey} />
           </View>
-          <Text style={styles.profileTxt}>Zeeshan hero</Text>
+          <Text style={styles.profileTxt}>{userName}</Text>
         </View>
       </View>
       <View style={styles.modeSwitch}>
-        <Text style={styles.modeTxt}>Switch to host mode</Text>
-        <TouchableOpacity>
-          <Text>change</Text>
-        </TouchableOpacity>
+        <Text style={styles.modeTxt}>Switch to {mode} mode</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#767577" }}
+          thumbColor={isEnabled ? COLORS.primaryGreen : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
       </View>
     </>
   );
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     justifyContent: "space-between",
+    alignItems: "center",
     padding: 15,
     borderRadius: 8,
     marginTop: -25,

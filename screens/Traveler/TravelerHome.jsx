@@ -8,37 +8,17 @@ import {
 } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { EvilIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
 import HomeHeading from "../../componets/HomeHeading";
 import ListingItem from "../../componets/ListingItem";
+import GreetingHeader from "../../componets/GreetingHeader";
 
 const TravelerHome = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerCotainer}>
-        <View>
-          <Text style={styles.userName}>Welcome Zeeshan 👋</Text>
-          <View style={{ flexDirection: "row" }}>
-            <EvilIcons
-              name="location"
-              size={24}
-              color={COLORS.iconsLightGrey}
-            />
-            <Text style={styles.locationText}>Rawalpindi,Pakistan</Text>
-          </View>
-        </View>
-        <TouchableOpacity>
-          <Ionicons
-            name="notifications-outline"
-            size={24}
-            color={COLORS.iconsLightGrey}
-          />
-        </TouchableOpacity>
-      </View>
+      <GreetingHeader userName="Zeeshan" />
       <View style={styles.serachContainer}>
         <AntDesign name="search1" size={24} color={COLORS.iconsLightGrey} />
         <TextInput
@@ -88,20 +68,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     paddingHorizontal: 15,
-  },
-  headerCotainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 15,
-  },
-  userName: {
-    fontSize: 20,
-    fontFamily: "Montserrat-SemiBold",
-  },
-  locationText: {
-    fontFamily: "Montserrat-Light",
-    fontSize: 16,
   },
   serachContainer: {
     flexDirection: "row",
