@@ -1,7 +1,15 @@
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import React from "react";
 import ListingFormNavigation from "../../../componets/ListingFormNavigation";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addListing } from "../../../store/redux/user-slice";
 const ListingInfoSix = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const createListing = useSelector((state) => state.createListing);
+  const doneCreateListingHandler = () => {
+    dispatch(addListing(createListing));
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.container}>
@@ -12,6 +20,7 @@ const ListingInfoSix = ({ navigation }) => {
             bPath="Step-5"
             forwIsShown={false}
             checkIsShown={true}
+            onDone={doneCreateListingHandler}
           />
         </View>
       </View>

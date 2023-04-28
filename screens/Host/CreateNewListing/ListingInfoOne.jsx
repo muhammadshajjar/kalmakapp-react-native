@@ -6,21 +6,58 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+
 import { COLORS } from "../../../constants";
 import ListingFormNavigation from "../../../componets/ListingFormNavigation";
 import ListInput from "../../../componets/ListInput";
 
+import { fillStepOne } from "../../../store/redux/createListing-slice";
+
 const ListingInfoOne = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({ name: "", description: "" });
+
+  const getListingName = (enteredText) => {
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        name: enteredText,
+      };
+    });
+  };
+
+  const getListingDescription = (enteredText) => {
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        description: enteredText,
+      };
+    });
+  };
+
+  const submitFormDataHandler = () => {
+    dispatch(fillStepOne(formData));
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.container}>
-        <ListInput label="Name" placeholder="Name of listing" />
+        <ListInput
+          label="Name"
+          placeholder="Name of listing"
+          onGetEnteredText={getListingName}
+          value={formData.name}
+        />
         <View style={styles.field}>
           <Text style={styles.labelTxt}>Description</Text>
           <TextInput
             style={[styles.input, styles.descInput]}
-            placeholder="Name of listing"
+            placeholder="Listing description"
+            onChangeText={(text) => getListingDescription(text)}
+            value={formData.description}
           />
         </View>
         <View style={{ justifyContent: "flex-end", flex: 1 }}>
@@ -28,6 +65,7 @@ const ListingInfoOne = ({ navigation }) => {
             navigation={navigation}
             fPath="Step-2"
             backIsShown={false}
+            onGoNext={submitFormDataHandler}
           />
         </View>
       </View>

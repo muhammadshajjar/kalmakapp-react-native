@@ -1,32 +1,37 @@
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, FlatList } from "react-native";
 import React from "react";
-import CheckBox from "@react-native-community/checkbox";
 import ListingFormNavigation from "../../../componets/ListingFormNavigation";
+
+import { FACILITIES } from "../../../data/listingData";
+import FacilitiesItem from "../../../componets/FacilitiesItem";
+
+import { fillStepFour } from "../../../store/redux/createListing-slice";
+import { useDispatch } from "react-redux";
+
 const ListingInfoFour = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const selectFacilityHandler = (id) => {
+    dispatch(fillStepFour(id));
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.container}>
         <Text style={styles.title}>
           What facilities do you have for campers?
         </Text>
-        <View style={styles.checkBoxContainer}>
-          <Text>Picnic table</Text>
-        </View>
-        <View style={styles.checkBoxContainer}>
-          <Text>Campfires</Text>
-        </View>
-        <View style={styles.checkBoxContainer}>
-          <Text>Drinking water</Text>
-        </View>
-        <View style={styles.checkBoxContainer}>
-          <Text>Pets allowed</Text>
-        </View>
-        <View style={styles.checkBoxContainer}>
-          <Text>Toilets</Text>
-        </View>
-        <View style={styles.checkBoxContainer}>
-          <Text>Trash cans</Text>
-        </View>
+
+        <FlatList
+          data={FACILITIES}
+          renderItem={({ item }) => (
+            <FacilitiesItem
+              name={item.name}
+              id={item.id}
+              onSelect={selectFacilityHandler}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+
         <View style={{ justifyContent: "flex-end", flex: 1 }}>
           <ListingFormNavigation
             navigation={navigation}
@@ -48,9 +53,4 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat-Medium",
     marginBottom: 10,
   },
-  checkBoxContainer: {
-    flexDirection: "row",
-    marginBottom: 8,
-  },
-  checkboxTxt: {},
 });

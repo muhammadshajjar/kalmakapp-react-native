@@ -9,6 +9,9 @@ import HostFlow from "./navigation/HostFlow";
 import AuthContextProvider from "./store/auth-context";
 
 import { AuthContext } from "./store/auth-context";
+import { Provider } from "react-redux";
+
+import { store } from "./store/redux/store";
 
 const Navigation = () => {
   const authCtx = useContext(AuthContext);
@@ -41,8 +44,10 @@ export default function App() {
   }
 
   return (
-    <AuthContextProvider>
-      <Navigation />
-    </AuthContextProvider>
+    <Provider store={store}>
+      <AuthContextProvider>
+        <Navigation />
+      </AuthContextProvider>
+    </Provider>
   );
 }

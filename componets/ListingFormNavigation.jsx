@@ -10,7 +10,15 @@ const ListingFormNavigation = ({
   backIsShown = true,
   forwIsShown = true,
   checkIsShown = false,
+  onGoNext = () => {},
+  onDone,
 }) => {
+  const forwardHandler = () => {
+    console.log("Called");
+    onGoNext();
+    navigation.navigate(fPath);
+  };
+
   return (
     <View style={styles.navContainer}>
       {backIsShown && (
@@ -22,15 +30,12 @@ const ListingFormNavigation = ({
         </TouchableOpacity>
       )}
       {forwIsShown && (
-        <TouchableOpacity
-          style={styles.btnContainer}
-          onPress={() => navigation.navigate(fPath)}
-        >
+        <TouchableOpacity style={styles.btnContainer} onPress={forwardHandler}>
           <AntDesign name="arrowright" size={30} color="white" />
         </TouchableOpacity>
       )}
       {checkIsShown && (
-        <TouchableOpacity style={styles.btnContainer} onPress={() => {}}>
+        <TouchableOpacity style={styles.btnContainer} onPress={() => onDone()}>
           <AntDesign name="check" size={30} color="white" />
         </TouchableOpacity>
       )}
