@@ -5,8 +5,9 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,9 +17,43 @@ import SocialMediaAuth from "../componets/SocialMediaAuth";
 import AuthInput from "../componets/AuthInput";
 import AuthButton from "../componets/AuthButton";
 
+import { db, auth } from "../firebase-config";
+
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 const Signup = ({ navigation }) => {
-  const signUpHandler = () => {
-    navigation.goBack();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getEmailHandler = (text) => {
+    setEmail(text);
+  };
+  const getPasswordHandler = (text) => {
+    setPassword(text);
+  };
+
+  const getFullNameHandler = (text) => {
+    setFullName(text);
+  };
+
+  const signUpHandler = async () => {
+    setIsLoading(true);
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setIsLoading(false);
+      Alert.alert("Account created successfully", "Login to continue", [
+        { text: "Login", onPress: () => navigation.goBack() },
+      ]);
+    } catch (err) {
+      setIsLoading(false);
+      Alert.alert("Authentication Failed", err.message);
+    }
   };
   return (
     <SafeAreaView>
@@ -60,6 +95,7 @@ const Signup = ({ navigation }) => {
                 keyboardType="default"
               />
             }
+            onGetEnteredText={getFullNameHandler}
           />
           <AuthInput
             placeholder="Email"
@@ -67,6 +103,7 @@ const Signup = ({ navigation }) => {
               <MaterialIcons name="alternate-email" size={20} color="#666" />
             }
             keyboardType="email-address"
+            onGetEnteredText={getEmailHandler}
           />
 
           <AuthInput
@@ -76,8 +113,13 @@ const Signup = ({ navigation }) => {
             }
             keyboardType="email-address"
             inputType="password"
+            onGetEnteredText={getPasswordHandler}
           />
-          <AuthButton label={"Signup"} onAuthenticate={signUpHandler} />
+          <AuthButton
+            label={"Signup"}
+            onAuthenticate={signUpHandler}
+            isLoading={isLoading}
+          />
           <View
             style={{
               flexDirection: "row",

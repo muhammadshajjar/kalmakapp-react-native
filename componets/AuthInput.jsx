@@ -3,8 +3,13 @@ import React from "react";
 
 import { COLORS } from "../constants";
 
-const AuthInput = ({ placeholder, keyboardType, icon, inputType }) => {
-  console.log(inputType);
+const AuthInput = ({
+  placeholder,
+  keyboardType,
+  icon,
+  inputType,
+  onGetEnteredText,
+}) => {
   return (
     <View
       style={{
@@ -23,6 +28,8 @@ const AuthInput = ({ placeholder, keyboardType, icon, inputType }) => {
         keyboardType={keyboardType}
         style={{ flex: 1, marginLeft: 6, fontSize: 15 }}
         secureTextEntry={inputType === "password" ? true : false}
+        onChangeText={(text) => onGetEnteredText(text)}
+        autoCapitalize="none"
       />
     </View>
   );

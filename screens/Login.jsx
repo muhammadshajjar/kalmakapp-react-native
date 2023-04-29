@@ -4,8 +4,9 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,11 +16,33 @@ import AuthButton from "../componets/AuthButton";
 import AuthInput from "../componets/AuthInput";
 import { AuthContext } from "../store/auth-context";
 
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { auth } from "../firebase-config";
+
 const Login = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const loginHandler = () => {
-    authCtx.authenticate("loksjfasdf");
+  const getEmailHandler = (text) => {
+    setEmail(text);
+  };
+  const getPasswordHandler = (text) => {
+    setPassword(text);
+  };
+
+  const loginHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      setIsLoading(false);
+      authCtx.authenticate(response?.user?.uid);
+    } catch (err) {
+      setIsLoading(false);
+      Alert.alert("Authentication Failed", err.message);
+    }
   };
 
   return (
@@ -42,6 +65,7 @@ const Login = ({ navigation }) => {
           placeholder="Eamil"
           icon={<MaterialIcons name="alternate-email" size={20} color="#666" />}
           keyboardType="email-address"
+          onGetEnteredText={getEmailHandler}
         />
 
         <AuthInput
@@ -51,6 +75,7 @@ const Login = ({ navigation }) => {
           }
           keyboardType="email-address"
           inputType="password"
+          onGetEnteredText={getPasswordHandler}
         />
 
         <TouchableOpacity style={{ alignSelf: "flex-end", marginTop: 10 }}>
@@ -59,19 +84,27 @@ const Login = ({ navigation }) => {
               fontSize: 15,
               color: COLORS.primaryGreen,
               fontFamily: "Montserrat-SemiBold",
+              marginBottom: 25,
             }}
           >
             Forgot?
           </Text>
         </TouchableOpacity>
-        <AuthButton label="Login" onAuthenticate={loginHandler} />
+
+        <AuthButton
+          label="Login"
+          onAuthenticate={loginHandler}
+          isLoading={isLoading}
+        />
+
         <Text
           style={{
             textAlign: "center",
             fontSize: 14,
             fontFamily: "Montserrat-Regular",
             color: COLORS.lightGrey,
-            marginVertical: 20,
+            marginTop: 60,
+            marginBottom: 20,
           }}
         >
           Or, login with...

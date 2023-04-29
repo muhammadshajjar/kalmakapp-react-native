@@ -1,28 +1,34 @@
-import { Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import React from "react";
 
 import { COLORS } from "../constants";
 
-const AuthButton = ({ label, onAuthenticate }) => {
+import SpinnerButton from "react-native-spinner-button";
+
+const AuthButton = ({ label, onAuthenticate, isLoading }) => {
   return (
-    <TouchableOpacity
-      style={{
-        backgroundColor: COLORS.primaryGreen,
-        borderRadius: 13,
-        paddingVertical: 17,
-        marginTop: 20,
-      }}
+    <SpinnerButton
+      indicatorCount={10}
+      buttonStyle={styles.buttonStyle}
+      isLoading={isLoading}
       onPress={() => onAuthenticate()}
+      spinnerType="WaveIndicator"
     >
-      <Text style={styles.btnContainer}>{label}</Text>
-    </TouchableOpacity>
+      <Text style={styles.buttonText}>{label}</Text>
+    </SpinnerButton>
   );
 };
 
 export default AuthButton;
 
 const styles = StyleSheet.create({
-  btnContainer: {
+  buttonStyle: {
+    backgroundColor: COLORS.primaryGreen,
+    borderRadius: 13,
+    marginTop: 40,
+    height: 60,
+  },
+  buttonText: {
     textAlign: "center",
     fontFamily: "Montserrat-SemiBold",
     fontSize: 18,
