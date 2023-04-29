@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useState } from "react";
 
 const initialState = {
   createListingForm: {
@@ -43,6 +42,9 @@ export const createListingSlice = createSlice({
     fillStepSix: (state, action) => {
       state.createListingForm.stepSix = action.payload;
     },
+    resetForm: (state) => {
+      state.createListingForm = initialState.createListingForm;
+    },
   },
 });
 
@@ -53,6 +55,7 @@ export const {
   fillStepFour,
   fillStepFive,
   fillStepSix,
+  resetForm,
 } = createListingSlice.actions;
 
 export default createListingSlice.reducer;

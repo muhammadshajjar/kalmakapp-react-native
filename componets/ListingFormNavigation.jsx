@@ -14,7 +14,6 @@ const ListingFormNavigation = ({
   onDone,
 }) => {
   const forwardHandler = () => {
-    console.log("Called");
     onGoNext();
     navigation.navigate(fPath);
   };

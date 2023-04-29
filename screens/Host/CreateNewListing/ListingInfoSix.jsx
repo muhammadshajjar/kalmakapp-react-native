@@ -4,10 +4,12 @@ import ListingFormNavigation from "../../../componets/ListingFormNavigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addListing } from "../../../store/redux/user-slice";
+import { resetForm } from "../../../store/redux/createListing-slice";
 const ListingInfoSix = ({ navigation }) => {
-  const dispatch = useDispatch();
   const createListing = useSelector((state) => state.createListing);
+  const dispatch = useDispatch();
   const doneCreateListingHandler = () => {
+    dispatch(resetForm());
     dispatch(addListing(createListing));
   };
   return (

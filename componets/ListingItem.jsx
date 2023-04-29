@@ -10,7 +10,7 @@ import React from "react";
 import { COLORS } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
-const ListingItem = ({ navigation, flag = false }) => {
+const ListingItem = ({ item, flag = false }) => {
   return (
     <View style={styles.listCotainer}>
       <View style={{ height: flag ? 200 : 120 }}>
@@ -22,14 +22,16 @@ const ListingItem = ({ navigation, flag = false }) => {
       <View style={styles.listInfoContainer}>
         <View style={styles.listInfo}>
           <View>
-            <Text style={styles.locationInfoTitle}>Place Name</Text>
+            <Text style={styles.locationInfoTitle}>{item?.stepOne?.name}</Text>
             <View style={styles.locationInfo}>
               <EvilIcons
                 name="location"
                 size={20}
                 color={COLORS.iconsLightGrey}
               />
-              <Text style={styles.locationInfoDes}>Hunza</Text>
+              <Text style={styles.locationInfoDes}>
+                {item?.stepThree?.city}
+              </Text>
             </View>
           </View>
           <View>
@@ -46,7 +48,7 @@ const ListingItem = ({ navigation, flag = false }) => {
                 color: COLORS.primaryGreen,
               }}
             >
-              $50
+              ${item?.stepFive?.price}
             </Text>
             <Text style={{ fontSize: 13, fontFamily: "Montserrat-Regular" }}>
               /Night
