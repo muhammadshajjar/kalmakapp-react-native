@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   listings: [],
-  userInfo: {
+  personalInfo: {
     name: "zeeshan",
     id: "123",
   },
@@ -13,10 +13,11 @@ export const userSlice = createSlice({
   reducers: {
     addListing: (state, action) => {
       const creationTime = new Date().toLocaleDateString();
+
       state.listings.push({
         creationTime,
         listingForm: action.payload.createListingForm,
-        userInfo: state.userInfo,
+        personalInfo: state.personalInfo,
         ratings: 0,
       });
     },
