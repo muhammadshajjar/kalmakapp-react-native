@@ -18,7 +18,8 @@ import { AuthContext } from "../store/auth-context";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
+import { collection, doc, getDoc } from "firebase/firestore";
 
 const Login = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
@@ -38,6 +39,7 @@ const Login = ({ navigation }) => {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
       setIsLoading(false);
+      console.log(response);
       authCtx.authenticate(response?.user?.uid);
     } catch (err) {
       setIsLoading(false);

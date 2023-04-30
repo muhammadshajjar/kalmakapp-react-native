@@ -15,6 +15,7 @@ const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchToken = async () => {
       const storedToken = await AsyncStorage.getItem("token");
+      console.log("in context ", storedToken);
       if (storedToken) {
         setAuthToken(storedToken);
       }
@@ -24,6 +25,7 @@ const AuthContextProvider = ({ children }) => {
   }, []);
 
   const authenticate = (token) => {
+    console.log("in authenticate", token);
     setAuthToken(token);
     AsyncStorage.setItem("token", token);
   };

@@ -20,12 +20,18 @@ import AuthButton from "../componets/AuthButton";
 import { db, auth } from "../firebase-config";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserProfileInfo } from "../store/redux/user-slice";
+import { generateUserName } from "../helper/generateUserName";
 
 const Signup = ({ navigation }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const getEmailHandler = (text) => {
     setEmail(text);
@@ -46,6 +52,26 @@ const Signup = ({ navigation }) => {
         email,
         password
       );
+
+      // try {
+      // await setDoc(doc(db, "users", user.uid), {
+      //   personalInfo: {
+      //     name: fullName,
+      //     email: email,
+      //     uid: user.uid,
+      //   },
+      // });
+
+      dispatch(
+        setUserProfileInfo({
+          userName: generateUserName(email),
+          email: email,
+          uid: user.uid,
+        })
+      );
+      // } catch (err) {
+      //   console.log(err.message);
+      // }
       setIsLoading(false);
       Alert.alert("Account created successfully", "Login to continue", [
         { text: "Login", onPress: () => navigation.goBack() },

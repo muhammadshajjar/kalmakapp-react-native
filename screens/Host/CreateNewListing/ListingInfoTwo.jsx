@@ -23,12 +23,7 @@ const ListingInfoTwo = ({ navigation }) => {
           <FlatList
             data={SPACES}
             renderItem={({ item }) => (
-              <ListSpacesItem
-                name={item.name}
-                icon={item.icon}
-                id={item.id}
-                onSelect={selectSpaceHandler}
-              />
+              <ListSpacesItem name={item.name} icon={item.icon} id={item.id} />
             )}
             keyExtractor={(item) => item.id}
           />

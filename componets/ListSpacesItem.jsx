@@ -8,18 +8,21 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { COLORS } from "../constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fillStepTwo } from "../store/redux/createListing-slice";
 
-const ListSpacesItem = ({ name, icon, id, onSelect }) => {
+const ListSpacesItem = ({ name, icon, id }) => {
   const createListing = useSelector((state) => state.createListing);
+  const dispatch = useDispatch();
 
+  // dispatch(fillStepTwo(id));
   return (
     <TouchableOpacity
       style={[
         styles.container,
         createListing.createListingForm.stepTwo === id ? styles.selected : "",
       ]}
-      onPress={() => onSelect(id)}
+      onPress={() => dispatch(fillStepTwo(id))}
     >
       {icon}
       <Text style={styles.text}>{name}</Text>

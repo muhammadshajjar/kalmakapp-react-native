@@ -5,9 +5,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
 import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
+import { useDispatch } from "react-redux";
+import { resetState } from "../../store/redux/user-slice";
 
 const TravelerProfile = () => {
   const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(resetState());
+    authCtx.logout();
+  };
   return (
     <>
       <ProfileHeader userName="Zeeshan Hero" mode="host" />
@@ -31,10 +38,7 @@ const TravelerProfile = () => {
               color={COLORS.iconsLightGrey}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.settingList}
-            onPress={() => authCtx.logout()}
-          >
+          <TouchableOpacity style={styles.settingList} onPress={logoutHandler}>
             <Text style={styles.settingListTxt}>Logout</Text>
             <AntDesign
               name="arrowright"

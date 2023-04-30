@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+
+import { ActivityIndicator, View } from "react-native";
 import AuthStack from "./navigation/AuthStack";
 
 import { useFonts } from "expo-font";
@@ -9,17 +11,49 @@ import HostFlow from "./navigation/HostFlow";
 import AuthContextProvider from "./store/auth-context";
 
 import { AuthContext } from "./store/auth-context";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 
 import { store } from "./store/redux/store";
+import { fetchUser, updateUser } from "./store/redux/user-actions";
+import { auth } from "./firebase-config";
+import uiSlice from "./store/redux/ui-slice";
 
+import Toast from "react-native-toast-message";
+
+let initialState = true;
 const Navigation = () => {
   const authCtx = useContext(AuthContext);
+  const userData = useSelector((state) => state.user);
+  console.log("userData", userData);
+  const dispatch = useDispatch();
+  const ui = useSelector((state) => state.ui);
+
+  useEffect(() => {
+    dispatch(fetchUser(authCtx?.token));
+  }, [authCtx?.token]);
+
+  useEffect(() => {
+    if (initialState) {
+      initialState = false;
+      return;
+    }
+    dispatch(updateUser(userData));
+  }, [userData]);
+
   let flowToShow; //their are two flows one for host and one for travelers show the screen according to the user
-  if (authCtx.mode === "traveler") {
-    flowToShow = <TravelerFlow />;
+
+  if (ui.isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center" }}>
+        <ActivityIndicator size="large" color="#89B374" />
+      </View>
+    );
   } else {
-    flowToShow = <HostFlow />;
+    if (authCtx.mode === "traveler") {
+      flowToShow = <TravelerFlow />;
+    } else {
+      flowToShow = <HostFlow />;
+    }
   }
   return (
     <>
@@ -47,6 +81,7 @@ export default function App() {
     <Provider store={store}>
       <AuthContextProvider>
         <Navigation />
+        <Toast />
       </AuthContextProvider>
     </Provider>
   );

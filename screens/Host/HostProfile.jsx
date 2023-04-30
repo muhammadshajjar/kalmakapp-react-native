@@ -4,9 +4,16 @@ import ProfileHeader from "../../componets/ProfileHeader";
 import { COLORS } from "../../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
+import { useDispatch } from "react-redux";
+import { resetState } from "../../store/redux/user-slice";
 
 const HostProfile = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(resetState());
+    authCtx.logout();
+  };
   return (
     <>
       <ProfileHeader userName="Zeeshan Hero" mode="guest" />
@@ -63,10 +70,7 @@ const HostProfile = ({ navigation }) => {
               color={COLORS.iconsLightGrey}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.settingList}
-            onPress={() => authCtx.logout()}
-          >
+          <TouchableOpacity style={styles.settingList} onPress={logoutHandler}>
             <Text style={styles.settingListTxt}>Logout</Text>
 
             <AntDesign

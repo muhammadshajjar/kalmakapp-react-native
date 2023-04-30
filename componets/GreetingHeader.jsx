@@ -3,7 +3,9 @@ import React from "react";
 import { EvilIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../constants";
-const GreetingHeader = ({ userName }) => {
+import { useSelector } from "react-redux";
+const GreetingHeader = () => {
+  const userName = useSelector((state) => state.user.personalInfo.userName);
   return (
     <View style={styles.headerCotainer}>
       <View>

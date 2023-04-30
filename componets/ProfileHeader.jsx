@@ -4,10 +4,13 @@ import { COLORS } from "../constants";
 import { Entypo } from "@expo/vector-icons";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
+import { useSelector } from "react-redux";
 
-const ProfileHeader = ({ userName, mode }) => {
+const ProfileHeader = ({ mode }) => {
   const authCtx = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
+
+  const userName = useSelector((state) => state.user.personalInfo.userName);
 
   const toggleSwitch = () => {
     authCtx.toggleModeHandler();
