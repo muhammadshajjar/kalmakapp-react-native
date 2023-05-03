@@ -6,7 +6,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -14,8 +14,15 @@ import { COLORS } from "../../constants";
 import HomeHeading from "../../componets/HomeHeading";
 import ListingItem from "../../componets/ListingItem";
 import GreetingHeader from "../../componets/GreetingHeader";
+import { useDispatch } from "react-redux";
+import { getAllListings } from "../../store/redux/allListings-actions";
 
 const TravelerHome = ({ navigation }) => {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   console.log("runs");
+  //   dispatch(getAllListings());
+  // }, []);
   return (
     <SafeAreaView style={styles.container}>
       <GreetingHeader userName="Zeeshan" />

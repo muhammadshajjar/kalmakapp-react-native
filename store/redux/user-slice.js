@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import uuid from "react-native-uuid";
 const initialState = {
   listings: [],
   personalInfo: {
@@ -30,8 +30,10 @@ export const userSlice = createSlice({
 
     addListing: (state, action) => {
       const creationTime = new Date().toLocaleDateString();
+      const listingId = uuid.v4();
 
       state.listings.push({
+        listingId,
         creationTime,
         listingForm: action.payload.createListingForm,
         personalInfo: state.personalInfo,

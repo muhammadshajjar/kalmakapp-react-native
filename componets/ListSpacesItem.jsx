@@ -15,7 +15,6 @@ const ListSpacesItem = ({ name, icon, id }) => {
   const createListing = useSelector((state) => state.createListing);
   const dispatch = useDispatch();
 
-  // dispatch(fillStepTwo(id));
   return (
     <TouchableOpacity
       style={[
