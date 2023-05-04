@@ -43,6 +43,7 @@ const AllListings = ({ navigation }) => {
               flag={true}
               item={item.listingForm}
               navigation={navigation}
+              id={item.listingId}
             />
           )}
           keyExtractor={(item) => item.listingId}

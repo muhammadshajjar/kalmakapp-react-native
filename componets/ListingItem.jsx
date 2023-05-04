@@ -10,7 +10,7 @@ import React from "react";
 import { COLORS } from "../constants";
 import { AntDesign } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
-const ListingItem = ({ item, flag = false }) => {
+const ListingItem = ({ item, flag = false, navigation, id }) => {
   return (
     <View style={styles.listCotainer}>
       <View style={{ height: flag ? 200 : 120 }}>
@@ -55,7 +55,7 @@ const ListingItem = ({ item, flag = false }) => {
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListingDetail")}
+            onPress={() => navigation.navigate("ListingDetail", { id })}
           >
             <AntDesign
               name="arrowright"

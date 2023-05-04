@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Text } from "react-native";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import TravelerHome from "../screens/Traveler/TravelerHome";
@@ -36,12 +38,19 @@ const BookingFlow = ({ navigation, route }) => {
         }}
         component={TravelerHome}
       />
-      <Stack.Screen name="ListingDetail" component={ListingDetail} />
+
       <Stack.Screen
         name="AllListings"
         component={AllListings}
         options={{
           headerTitle: "All Listings",
+        }}
+      />
+      <Stack.Screen
+        name="ListingDetail"
+        component={ListingDetail}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
