@@ -4,6 +4,7 @@ const initialState = {
   isLoading: false,
   uploading: false,
   showLoader: false,
+  isBooking: false,
 };
 
 export const uiSlice = createSlice({
@@ -25,6 +26,12 @@ export const uiSlice = createSlice({
     setShowLoader: (state) => {
       state.showLoader = true;
     },
+    setIsBooking: (state) => {
+      state.isBooking = true;
+    },
+    removeIsBooking: (state) => {
+      state.isBooking = false;
+    },
   },
 });
 
@@ -34,6 +41,8 @@ export const {
   setIsUploading,
   removeIsUploading,
   setShowLoader,
+  setIsBooking,
+  removeIsBooking,
 } = uiSlice.actions;
 
 export default uiSlice.reducer;

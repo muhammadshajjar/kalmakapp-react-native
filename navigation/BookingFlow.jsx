@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TravelerHome from "../screens/Traveler/TravelerHome";
 import ListingDetail from "../screens/Traveler/ListingDetail";
 import AllListings from "../screens/Traveler/AllListings";
+import BookingDetail from "../screens/Traveler/BookingDetails";
 
 const Stack = createNativeStackNavigator();
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
@@ -51,6 +52,13 @@ const BookingFlow = ({ navigation, route }) => {
         component={ListingDetail}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BookingDetail"
+        component={BookingDetail}
+        options={{
+          title: "Booking Details",
         }}
       />
     </Stack.Navigator>

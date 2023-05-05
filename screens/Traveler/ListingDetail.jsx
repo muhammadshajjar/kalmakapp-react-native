@@ -147,7 +147,15 @@ const ListingDetail = ({ route, navigation }) => {
             <Text style={[styles.regularTxt, { color: "black" }]}>night</Text>
           </Text>
         </View>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() =>
+            navigation.navigate("BookingDetail", {
+              listingId: selectedListing.listingId,
+              details: selectedListing.listingForm.stepFive,
+            })
+          }
+        >
           <Text style={styles.btnTxt}>Reserve now</Text>
         </TouchableOpacity>
       </View>
