@@ -14,17 +14,15 @@ import {
 export const updateUser = (userData) => {
   return async (dispatch) => {
     dispatch(setIsUploading());
-    dispatch(setIsBooking());
     try {
       console.log(userData.personalInfo.uid);
       const docRef = doc(db, "users", userData.personalInfo.uid);
       await setDoc(docRef, userData);
       console.log("document is written");
+
       dispatch(removeIsUploading());
-      dispatch(removeIsBooking());
     } catch (err) {
       dispatch(removeIsUploading());
-      dispatch(removeIsBooking());
       console.log("not written");
     }
   };

@@ -13,12 +13,16 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
 import Lottie from "lottie-react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { addBooking, addListing } from "../../store/redux/user-slice";
+import SpinnerButton from "react-native-spinner-button";
+import { useSelector } from "react-redux";
+import { doc, updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase-config";
+
 const BookingDetail = ({ route }) => {
   const { listingId, details } = route?.params;
   const { personalInfo } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const [isBooking, setIsBooking] = useState(false);
+  const [doneBooking, setDoneBooking] = useState(false);
 
   const [range, setRange] = useState({
     startDate: undefined,
@@ -32,7 +36,7 @@ const BookingDetail = ({ route }) => {
   const [noOfDays, setNoOfDays] = useState(0);
   const [guests, setGuests] = useState(1);
   const [open, setOpen] = useState(false);
-  const [doneBooking, setDoneBooking] = useState(false);
+
   const onDismiss = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
@@ -82,18 +86,30 @@ const BookingDetail = ({ route }) => {
     }
   };
 
-  const bookLisingHandler = () => {
+  const bookLisingHandler = async () => {
     const bookingDetails = {
       listingId,
       checkIn: modifiedDates.start,
       checkOut: modifiedDates.end,
       bookedBy: personalInfo,
       totalPrice: noOfDays * guests * details.price,
+      bookingTime: new Date().toLocaleDateString(),
     };
-    console.log(bookingDetails);
 
-    dispatch(addBooking(bookingDetails));
-    setDoneBooking(true);
+    try {
+      setIsBooking(true);
+      const docRef = doc(db, "users", bookingDetails.bookedBy.uid);
+      await updateDoc(docRef, {
+        bookings: arrayUnion(bookingDetails),
+      });
+      setIsBooking(false);
+      setDoneBooking(true);
+      console.log("data is written succssfull");
+    } catch (err) {
+      console.log(err);
+      setIsBooking(false);
+      Alert.alert("Booking Error", err.message);
+    }
   };
   return (
     <View style={styles.container}>
@@ -168,15 +184,21 @@ const BookingDetail = ({ route }) => {
             </Text>
           </View>
           <View style={{ alignItems: "center", marginTop: 30 }}>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => bookLisingHandler()}
-            >
-              <Text style={styles.btnTxt}>Book Now</Text>
-            </TouchableOpacity>
+            <View style={{ width: "60%" }}>
+              <SpinnerButton
+                indicatorCount={10}
+                buttonStyle={styles.buttonStyle}
+                isLoading={isBooking}
+                onPress={() => bookLisingHandler()}
+                spinnerType="WaveIndicator"
+              >
+                <Text style={styles.buttonText}>Book Now</Text>
+              </SpinnerButton>
+            </View>
           </View>
         </View>
       )}
+
       {doneBooking && (
         <Lottie
           source={require("../../assets/animations/donebooking.json")}
@@ -258,5 +280,18 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat-Medium",
     color: "white",
     textAlign: "center",
+  },
+  buttonStyle: {
+    backgroundColor: COLORS.primaryGreen,
+    borderRadius: 13,
+    marginTop: 40,
+    height: 60,
+  },
+  buttonText: {
+    textAlign: "center",
+    fontFamily: "Montserrat-SemiBold",
+    fontSize: 18,
+    letterSpacing: 1,
+    color: "#fff",
   },
 });

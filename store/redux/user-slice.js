@@ -41,20 +41,10 @@ export const userSlice = createSlice({
         ratings: 0,
       });
     },
-    addBooking: (state, action) => {
-      console.log("in reducer", action.payload);
-      console.log(state);
-      // state.bookings.push(action.payload);
-    },
   },
 });
 
-export const {
-  addListing,
-  setUserData,
-  setUserProfileInfo,
-  resetState,
-  addBooking,
-} = userSlice.actions;
+export const { addListing, setUserData, setUserProfileInfo, resetState } =
+  userSlice.actions;
 
 export default userSlice.reducer;

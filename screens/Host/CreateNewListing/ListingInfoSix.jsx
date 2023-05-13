@@ -49,7 +49,7 @@ const ListingInfoSix = ({ navigation }) => {
             bPath="Step-5"
             forwIsShown={false}
             checkIsShown={true}
-            onDone={doneCreateListingHandler}
+            onDone={x}
           />
         </View>
       </View>
