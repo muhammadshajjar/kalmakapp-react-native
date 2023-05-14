@@ -8,8 +8,6 @@ import {
   removeIsLoading,
   setIsUploading,
   removeIsUploading,
-  setIsBooking,
-  removeIsBooking,
 } from "./ui-slice";
 export const updateUser = (userData) => {
   return async (dispatch) => {

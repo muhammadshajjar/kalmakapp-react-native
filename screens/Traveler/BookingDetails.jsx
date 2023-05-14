@@ -15,11 +15,12 @@ import { COLORS } from "../../constants";
 import Lottie from "lottie-react-native";
 import SpinnerButton from "react-native-spinner-button";
 import { useSelector } from "react-redux";
-import { doc, updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import uuid from "react-native-uuid";
 
 const BookingDetail = ({ route }) => {
-  const { listingId, details } = route?.params;
+  const { listingId, details, hostId } = route?.params;
   const { personalInfo } = useSelector((state) => state.user);
   const [isBooking, setIsBooking] = useState(false);
   const [doneBooking, setDoneBooking] = useState(false);
@@ -88,17 +89,27 @@ const BookingDetail = ({ route }) => {
 
   const bookLisingHandler = async () => {
     const bookingDetails = {
+      bookingId: uuid.v4(),
       listingId,
       checkIn: modifiedDates.start,
       checkOut: modifiedDates.end,
       bookedBy: personalInfo,
       totalPrice: noOfDays * guests * details.price,
       bookingTime: new Date().toLocaleDateString(),
+      noOfGuests: guests,
     };
 
     try {
       setIsBooking(true);
       const docRef = doc(db, "users", bookingDetails.bookedBy.uid);
+
+      const listingOwnerDoc = doc(db, "users", hostId);
+      await updateDoc(listingOwnerDoc, {
+        orders: {
+          orderId: uuid.v4(),
+          details: bookingDetails,
+        },
+      });
       await updateDoc(docRef, {
         bookings: arrayUnion(bookingDetails),
       });

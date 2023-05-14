@@ -153,6 +153,7 @@ const ListingDetail = ({ route, navigation }) => {
             navigation.navigate("BookingDetail", {
               listingId: selectedListing.listingId,
               details: selectedListing.listingForm.stepFive,
+              hostId: selectedListing.personalInfo.uid,
             })
           }
         >

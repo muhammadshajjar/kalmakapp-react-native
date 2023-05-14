@@ -3,6 +3,7 @@ import uuid from "react-native-uuid";
 const initialState = {
   listings: [],
   bookings: [],
+  orders: [],
   personalInfo: {
     userName: "",
     email: "",
