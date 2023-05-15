@@ -20,7 +20,7 @@ import uiSlice from "./store/redux/ui-slice";
 
 import Toast from "react-native-toast-message";
 
-import { enGB, registerTranslation } from "react-native-paper-dates";
+import { enGB, registerTranslation, enLocale } from "react-native-paper-dates";
 registerTranslation("en-GB", enGB);
 
 let initialState = true;

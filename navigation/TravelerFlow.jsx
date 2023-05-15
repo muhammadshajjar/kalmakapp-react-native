@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 const Tab = createBottomTabNavigator();
 
 import TravelerWishList from "../screens/Traveler/TravelerWishList";
-import TravelerBooked from "../screens/Traveler/TravelerBooked";
+import TravelerBookings from "../screens/Traveler/TravelerBookings";
 import TravelerProfile from "../screens/Traveler/TravelerProfile";
 import TravelerInbox from "../screens/Traveler/TravelerInbox";
 
@@ -55,9 +55,9 @@ const TravelerFlow = () => {
         />
         <Tab.Screen
           name="TBooked"
-          component={TravelerBooked}
+          component={TravelerBookings}
           options={{
-            tabBarLabel: "Booked",
+            tabBarLabel: "Bookings",
             tabBarIcon: ({ color, size }) => (
               <AntDesign name="book" size={size} color={color} />
             ),

@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 const BookingFlow = ({ navigation, route }) => {
-  const tabHiddenRoutes = ["ListingDetail", "AllListings"];
+  const tabHiddenRoutes = ["ListingDetail", "AllListings", "BookingDetail"];
   React.useLayoutEffect(() => {
     if (tabHiddenRoutes.includes(getFocusedRouteNameFromRoute(route))) {
       navigation.setOptions({ tabBarStyle: { display: "none" } });

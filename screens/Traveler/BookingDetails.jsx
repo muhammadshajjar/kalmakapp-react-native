@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Platform,
+  Image,
 } from "react-native";
 import React, { useState, useCallback } from "react";
 import { DatePickerModal } from "react-native-paper-dates";
@@ -131,7 +133,7 @@ const BookingDetail = ({ route }) => {
               Please fill out the details below
             </Text>
             <DatePickerModal
-              locale="en"
+              locale="en-GB"
               mode="range"
               visible={open}
               onDismiss={onDismiss}
@@ -142,7 +144,10 @@ const BookingDetail = ({ route }) => {
             />
           </View>
           <View>
-            <View style={styles.datesContainer}>
+            <TouchableOpacity
+              style={styles.datesContainer}
+              onPressIn={() => setOpen(true)}
+            >
               <MaterialCommunityIcons
                 name="calendar-month-outline"
                 size={28}
@@ -150,7 +155,7 @@ const BookingDetail = ({ route }) => {
               />
               <TextInput
                 style={styles.input}
-                editable="false"
+                editable={false}
                 value={`${
                   modifiedDates.start.length > 0
                     ? modifiedDates.start
@@ -160,7 +165,7 @@ const BookingDetail = ({ route }) => {
                 }`}
                 onPressIn={() => setOpen(true)}
               />
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.guestContainer}>
             <View style={styles.actions}>
@@ -210,12 +215,31 @@ const BookingDetail = ({ route }) => {
         </View>
       )}
 
-      {doneBooking && (
+      {doneBooking && Platform.OS == "ios" && (
         <Lottie
           source={require("../../assets/animations/donebooking.json")}
           autoPlay
           loop
         />
+      )}
+      {doneBooking && Platform.OS == "android" && (
+        <View style={{ height: 400, width: 350, alignSelf: "center" }}>
+          <Image
+            style={{ resizeMode: "contain", height: "100%", width: "100%" }}
+            source={require("../../assets/images/bookingillustration.png")}
+          />
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 22,
+              marginTop: -40,
+              fontFamily: "Montserrat-Bold",
+              color: COLORS.primaryGreen,
+            }}
+          >
+            Done!
+          </Text>
+        </View>
       )}
     </View>
   );
@@ -232,7 +256,7 @@ const styles = StyleSheet.create({
   headingTxt: {
     fontSize: 20,
     fontFamily: "Montserrat-SemiBold",
-    marginVertical: 10,
+    marginVertical: 25,
   },
   datesContainer: {
     borderWidth: 1,
@@ -284,7 +308,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryGreen,
     padding: 15,
     borderRadius: 12,
-    width: "60%",
+    width: "50%",
   },
   btnTxt: {
     fontSize: 18,
@@ -296,7 +320,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primaryGreen,
     borderRadius: 13,
     marginTop: 40,
-    height: 60,
+    height: 55,
   },
   buttonText: {
     textAlign: "center",
