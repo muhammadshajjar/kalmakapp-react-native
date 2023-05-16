@@ -107,10 +107,10 @@ const BookingDetail = ({ route }) => {
 
       const listingOwnerDoc = doc(db, "users", hostId);
       await updateDoc(listingOwnerDoc, {
-        orders: {
+        orders: arrayUnion({
           orderId: uuid.v4(),
           details: bookingDetails,
-        },
+        }),
       });
       await updateDoc(docRef, {
         bookings: arrayUnion(bookingDetails),

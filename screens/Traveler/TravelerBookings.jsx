@@ -36,7 +36,9 @@ const TravelerBookings = () => {
 
   const getAllBookings = async () => {
     const snap = await getDoc(doc(db, "users", userId));
+    console.log(snap.data().bookings);
     setBookings(snap.data().bookings);
+
     setIsLoading(false);
   };
 
