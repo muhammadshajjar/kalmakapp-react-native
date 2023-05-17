@@ -53,25 +53,17 @@ const Signup = ({ navigation }) => {
         password
       );
 
-      // try {
-      // await setDoc(doc(db, "users", user.uid), {
-      //   personalInfo: {
-      //     name: fullName,
-      //     email: email,
-      //     uid: user.uid,
-      //   },
-      // });
-
-      dispatch(
-        setUserProfileInfo({
+      await setDoc(doc(db, "users", user.uid), {
+        bookings: [],
+        orders: [],
+        listings: [],
+        personalInfo: {
           userName: generateUserName(email),
           email: email,
           uid: user.uid,
-        })
-      );
-      // } catch (err) {
-      //   console.log(err.message);
-      // }
+        },
+      });
+
       setIsLoading(false);
       Alert.alert("Account created successfully", "Login to continue", [
         { text: "Login", onPress: () => navigation.goBack() },
