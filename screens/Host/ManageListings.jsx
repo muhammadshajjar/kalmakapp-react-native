@@ -1,11 +1,16 @@
 import { View, FlatList } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import ListingItem from "../../componets/ListingItem";
 import CreateListingBtn from "../../componets/CreateListingBtn";
 import { useSelector } from "react-redux";
 const ManageListings = ({ navigation }) => {
-  const myListings = useSelector((state) => state.user.listings);
+  const allListings = useSelector((state) => state.allListing.allListings);
+  const uid = useSelector((state) => state.user.personalInfo.uid);
+
+  const myListings = allListings.filter(
+    (listing) => listing.personalInfo.uid === uid
+  );
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 30, paddingVertical: 20 }}>

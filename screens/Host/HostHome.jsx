@@ -1,11 +1,17 @@
 import { Text, View, StyleSheet, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import GreetingHeader from "../../componets/GreetingHeader";
 import ListingItem from "../../componets/ListingItem";
 import { useSelector } from "react-redux";
 const HostHome = () => {
-  const myListings = useSelector((state) => state.user.listings);
+  const allListings = useSelector((state) => state.allListing.allListings);
+  const uid = useSelector((state) => state.user.personalInfo.uid);
+
+  const myListings = allListings.filter(
+    (listing) => listing.personalInfo.uid === uid
+  );
+
   return (
     <SafeAreaView style={styles.container}>
       <GreetingHeader userName="Zeeshan" />
@@ -15,9 +21,14 @@ const HostHome = () => {
           <FlatList
             data={myListings}
             renderItem={({ item }) => (
-              <ListingItem flag={true} item={item.listingForm} />
+              <ListingItem
+                flag={true}
+                item={item.listingForm}
+                // navigation={navigation}
+                id={item.listingId}
+              />
             )}
-            keyExtractor={(item) => Math.random().toString()}
+            keyExtractor={(item) => item.listingId}
             showsVerticalScrollIndicator={false}
           />
         </View>

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
-  ScrollView,
+  FlatList,
 } from "react-native";
 import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,15 +14,18 @@ import { COLORS } from "../../constants";
 import HomeHeading from "../../componets/HomeHeading";
 import ListingItem from "../../componets/ListingItem";
 import GreetingHeader from "../../componets/GreetingHeader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllListings } from "../../store/redux/allListings-actions";
+import ListingsSkeleton from "../../componets/UI/ListingsSkeleton";
 
 const TravelerHome = ({ navigation }) => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   console.log("runs");
-  //   dispatch(getAllListings());
-  // }, []);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllListings());
+  }, []);
+
+  const { isLoading, allListings } = useSelector((state) => state.allListing);
+
   return (
     <SafeAreaView style={styles.container}>
       <GreetingHeader userName="Zeeshan" />
@@ -51,17 +54,36 @@ const TravelerHome = ({ navigation }) => {
         navigation={navigation}
       />
       <View style={styles.listings}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <View style={{ marginRight: 15, width: 210 }}>
-            <ListingItem navigation={navigation} />
-          </View>
-          <View style={{ marginRight: 15, width: 210 }}>
-            <ListingItem navigation={navigation} />
-          </View>
-          <View style={{ marginRight: 15, width: 210 }}>
-            <ListingItem navigation={navigation} />
-          </View>
-        </ScrollView>
+        {isLoading && (
+          <FlatList
+            data={[1, 1, 1, 1]}
+            renderItem={() => (
+              <View style={{ marginRight: 15, width: 210 }}>
+                <ListingsSkeleton flag={true} />
+              </View>
+            )}
+            keyExtractor={() => Math.random()}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        )}
+        {!isLoading && (
+          <FlatList
+            data={allListings}
+            renderItem={({ item }) => (
+              <View style={{ marginRight: 15, width: 210 }}>
+                <ListingItem
+                  item={item.listingForm}
+                  navigation={navigation}
+                  id={item.listingId}
+                />
+              </View>
+            )}
+            keyExtractor={(item) => item.listingId}
+            showsHorizontalScrollIndicator={false}
+            horizontal={true}
+          />
+        )}
       </View>
       <HomeHeading headingText="Popular Destination" btnText="View All" />
     </SafeAreaView>

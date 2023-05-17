@@ -15,16 +15,16 @@ import { getAllListings } from "../../store/redux/allListings-actions";
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
 const AllListings = ({ navigation }) => {
-  const { isLoading, allListings, visited } = useSelector(
-    (state) => state.allListing
-  );
-  const dispatch = useDispatch();
+  const { isLoading, allListings } = useSelector((state) => state.allListing);
 
-  useEffect(() => {
-    if (visited) return;
+  // console.log(allListings);
+  // const dispatch = useDispatch();
 
-    dispatch(getAllListings());
-  }, []);
+  // useEffect(() => {
+  //   if (visited) return;
+
+  //   dispatch(getAllListings());
+  // }, [allListings]);
 
   return (
     <View style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 20 }}>

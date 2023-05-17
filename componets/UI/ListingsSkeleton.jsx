@@ -4,10 +4,18 @@ import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import { LinearGradient } from "expo-linear-gradient";
 import { COLORS } from "../../constants";
 const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
-const ListingsSkeleton = () => {
+const ListingsSkeleton = ({ flag = false }) => {
   return (
     <View style={styles.container}>
-      <ShimmerPlaceholder style={{ height: 180, width: "100%" }} />
+      <View>
+        <ShimmerPlaceholder
+          style={{
+            height: flag ? 120 : 200,
+            width: "100%",
+            backgroundColor: "red",
+          }}
+        />
+      </View>
       <View style={styles.content}>
         <ShimmerPlaceholder style={{ width: "45%" }} />
         <ShimmerPlaceholder style={{ width: "45%" }} />

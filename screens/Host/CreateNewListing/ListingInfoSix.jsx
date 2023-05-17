@@ -5,18 +5,28 @@ import ListingFormNavigation from "../../../componets/ListingFormNavigation";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { addListing } from "../../../store/redux/user-slice";
 import { resetForm } from "../../../store/redux/createListing-slice";
 
-import { setShowLoader } from "../../../store/redux/ui-slice";
+import { setListing } from "../../../store/redux/allListings-actions";
+import uuid from "react-native-uuid";
 const ListingInfoSix = ({ navigation }) => {
   const createListing = useSelector((state) => state.createListing);
-  const ui = useSelector((state) => state.ui);
+  const personalInfo = useSelector((state) => state.user.personalInfo);
   const dispatch = useDispatch();
-
+  const { isDone, isUploading } = useSelector((state) => state.allListing);
   const doneCreateListingHandler = () => {
     dispatch(resetForm());
-    dispatch(addListing(createListing));
+    const creationTime = new Date().toLocaleDateString();
+    const listingId = uuid.v4();
+    dispatch(
+      setListing({
+        listingId,
+        creationTime,
+        listingForm: createListing.createListingForm,
+        personalInfo,
+        ratings: 0,
+      })
+    );
   };
 
   const uploading = () => {
@@ -26,7 +36,6 @@ const ListingInfoSix = ({ navigation }) => {
       position: "bottom",
       autoHide: false,
     });
-    dispatch(setShowLoader());
   };
   const successToast = () => {
     Toast.hide();
@@ -40,9 +49,8 @@ const ListingInfoSix = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={styles.container}>
         <Text>Upload picture</Text>
-
-        {ui.uploading && uploading()}
-        {!ui.uploading && ui.showLoader && successToast()}
+        {isUploading && uploading()}
+        {!isUploading && isDone && successToast()}
         <View style={{ justifyContent: "flex-end", flex: 1 }}>
           <ListingFormNavigation
             navigation={navigation}
