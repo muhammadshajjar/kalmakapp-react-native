@@ -26,7 +26,6 @@ export const getAllListings = () => {
         const listings = doc.data().listings;
         allListings.push(...listings);
       });
-
       dispatch(setIsLoading(false));
       dispatch(setAllListing(allListings));
     } catch (err) {

@@ -76,6 +76,7 @@ const TravelerHome = ({ navigation }) => {
                   item={item.listingForm}
                   navigation={navigation}
                   id={item.listingId}
+                  allData={item}
                 />
               </View>
             )}

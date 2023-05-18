@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
 import { useDispatch } from "react-redux";
 import { resetState } from "../../store/redux/user-slice";
+import { resetAllListings } from "../../store/redux/allListings-slice";
 
 const TravelerProfile = () => {
   const authCtx = useContext(AuthContext);
@@ -14,6 +15,7 @@ const TravelerProfile = () => {
   const logoutHandler = () => {
     dispatch(resetState());
     authCtx.logout();
+    dispatch(resetAllListings());
   };
   return (
     <>

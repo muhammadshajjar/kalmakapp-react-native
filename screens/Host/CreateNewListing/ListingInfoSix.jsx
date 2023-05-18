@@ -25,6 +25,7 @@ const ListingInfoSix = ({ navigation }) => {
         listingForm: createListing.createListingForm,
         personalInfo,
         ratings: 0,
+        wishListUsers: [],
       })
     );
   };

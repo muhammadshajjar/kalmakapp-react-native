@@ -17,15 +17,6 @@ const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 const AllListings = ({ navigation }) => {
   const { isLoading, allListings } = useSelector((state) => state.allListing);
 
-  // console.log(allListings);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (visited) return;
-
-  //   dispatch(getAllListings());
-  // }, [allListings]);
-
   return (
     <View style={{ flex: 1, paddingHorizontal: 20, paddingVertical: 20 }}>
       {isLoading && (

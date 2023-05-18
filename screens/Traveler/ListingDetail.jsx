@@ -16,17 +16,29 @@ import { EvilIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { FACILITIES } from "../../data/listingData";
 import FacilityItem from "../../componets/FacilityItem";
+
+import {
+  getDoc,
+  doc,
+  updateDoc,
+  arrayRemove,
+  arrayUnion,
+} from "firebase/firestore";
+import { db } from "../../firebase-config";
+
+let isInitial = true;
 const ListingDetail = ({ route, navigation }) => {
   const [selectedListing, setSelectedListing] = useState({});
   const [selectedFacilites, setSelectedFacilites] = useState([]);
   const { id } = route.params;
   const { allListings } = useSelector((state) => state.allListing);
+  const { uid } = useSelector((state) => state?.user?.personalInfo);
 
   useEffect(() => {
     const [filteredListing] = allListings.filter(
       (listItem) => listItem.listingId === id
     );
-    console.log(filteredListing);
+
     setSelectedListing(filteredListing);
 
     const thisLisitingFacilities = filteredListing?.listingForm?.stepFour;
@@ -36,6 +48,55 @@ const ListingDetail = ({ route, navigation }) => {
     setSelectedFacilites(filterdFacilites);
   }, []);
 
+  useEffect(() => {
+    if (isInitial && selectedListing.length > 0) {
+      isInitial = false;
+      return;
+    }
+
+    updateData();
+  }, [selectedListing]);
+  const updateData = async () => {
+    const bookingOwnerDoc = doc(db, "users", selectedListing.personalInfo.uid);
+
+    try {
+      await updateDoc(bookingOwnerDoc, {
+        listings: arrayUnion(selectedListing),
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const addListingToWishList = async () => {
+    const bookingOwnerDoc = doc(db, "users", selectedListing.personalInfo.uid);
+
+    try {
+      await updateDoc(bookingOwnerDoc, {
+        listings: arrayRemove(selectedListing),
+      });
+
+      if (selectedListing.wishListUsers.includes(uid)) {
+        setSelectedListing((prevListing) => {
+          return {
+            ...prevListing,
+            wishListUsers: prevListing.wishListUsers.filter(
+              (userId) => userId !== uid
+            ),
+          };
+        });
+      } else {
+        setSelectedListing((prevListing) => {
+          return {
+            ...prevListing,
+            wishListUsers: [...prevListing.wishListUsers, uid],
+          };
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -56,12 +117,19 @@ const ListingDetail = ({ route, navigation }) => {
             color={COLORS.iconsLightGrey}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actions}>
-          <Ionicons
-            name="heart-outline"
-            size={25}
-            color={COLORS.iconsLightGrey}
-          />
+        <TouchableOpacity
+          style={styles.actions}
+          onPress={() => addListingToWishList()}
+        >
+          {selectedListing?.wishListUsers?.includes(uid) ? (
+            <Ionicons name="heart" size={24} color="black" />
+          ) : (
+            <Ionicons
+              name="heart-outline"
+              size={25}
+              color={COLORS.iconsLightGrey}
+            />
+          )}
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
