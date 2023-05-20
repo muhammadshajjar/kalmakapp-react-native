@@ -109,7 +109,7 @@ const ListingDetail = ({ route, navigation }) => {
       <View style={styles.actionsContainer}>
         <TouchableOpacity
           style={styles.actions}
-          onPress={() => navigation.navigate("AllListings")}
+          onPress={() => navigation.navigate("THome")}
         >
           <Ionicons
             name="arrow-back-outline"
