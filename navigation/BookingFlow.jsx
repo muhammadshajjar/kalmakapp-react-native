@@ -11,6 +11,7 @@ import BookingDetail from "../screens/Traveler/BookingDetails";
 
 const Stack = createNativeStackNavigator();
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import FilteredListings from "../screens/Traveler/FilteredListings";
 
 const BookingFlow = ({ navigation, route }) => {
   const tabHiddenRoutes = ["ListingDetail", "AllListings", "BookingDetail"];
@@ -52,6 +53,13 @@ const BookingFlow = ({ navigation, route }) => {
         component={ListingDetail}
         options={{
           headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="FilterListings"
+        component={FilteredListings}
+        options={{
+          headerTitle: "Search Results",
         }}
       />
       <Stack.Screen
