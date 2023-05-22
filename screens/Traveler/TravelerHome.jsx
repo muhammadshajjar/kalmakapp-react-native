@@ -7,6 +7,8 @@ import {
   Modal,
   FlatList,
   Alert,
+  Image,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,6 +24,7 @@ import ListingsSkeleton from "../../componets/UI/ListingsSkeleton";
 import { Slider } from "@miblanchard/react-native-slider";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import Destinations from "../../componets/Destinations";
 
 const TravelerHome = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -80,168 +83,181 @@ const TravelerHome = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <GreetingHeader userName="Zeeshan" />
-      <View style={styles.serachContainer}>
-        <TouchableOpacity onPress={() => submitSearchResultHandler()}>
-          <AntDesign name="search1" size={24} color={COLORS.iconsLightGrey} />
-        </TouchableOpacity>
-        <TextInput
-          style={styles.serachInput}
-          placeholder="Search Destination"
-          onSubmitEditing={submitSearchResultHandler}
-          onChangeText={(text) => setSearchDistination(text.toLowerCase())}
-          autoComplete={false}
-          autoCapitalize={false}
-        />
-        <View style={styles.seperator}></View>
-        <TouchableOpacity
-          onPress={() => {
-            setModalVisible(true);
-            setShowFilters(true);
-          }}
-        >
-          <AntDesign name="filter" size={28} color={COLORS.primaryGreen} />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <FlatList
-          data={filters}
-          renderItem={({ item }) => (
-            <View style={styles.filterContainer}>
-              <Text style={styles.filterText}>
-                {item.label} : {item.data}
-              </Text>
-              <TouchableOpacity onPress={() => removeFilterTabHandler(item)}>
-                <Entypo name="cross" size={24} color={COLORS.primaryGreen} />
-              </TouchableOpacity>
-            </View>
-          )}
-          keyExtractor={(item) => item.label}
-          horizontal={true}
-        />
-        {filters.length === 0 && showFilters && (
-          <Text style={styles.feedBackTxt}>No filters yet!</Text>
-        )}
-      </View>
-
-      <HomeHeading
-        headingText="Listings"
-        btnText="View All"
-        navigation={navigation}
-      />
-      <View style={styles.listings}>
-        {isLoading && (
-          <FlatList
-            data={[1, 1, 1, 1]}
-            renderItem={() => (
-              <View style={{ marginRight: 15, width: 210 }}>
-                <ListingsSkeleton flag={true} />
-              </View>
-            )}
-            keyExtractor={() => Math.random()}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <GreetingHeader userName="Zeeshan" />
+        <View style={styles.serachContainer}>
+          <TouchableOpacity onPress={() => submitSearchResultHandler()}>
+            <AntDesign name="search1" size={24} color={COLORS.iconsLightGrey} />
+          </TouchableOpacity>
+          <TextInput
+            style={styles.serachInput}
+            placeholder="Search Destination"
+            onSubmitEditing={submitSearchResultHandler}
+            onChangeText={(text) => setSearchDistination(text.toLowerCase())}
+            autoComplete={false}
+            autoCapitalize={false}
           />
-        )}
-        {!isLoading && (
-          <FlatList
-            data={allListings}
-            renderItem={({ item }) => (
-              <View style={{ marginRight: 15, width: 210 }}>
-                <ListingItem
-                  item={item.listingForm}
-                  navigation={navigation}
-                  id={item.listingId}
-                  allData={item}
-                />
-              </View>
-            )}
-            keyExtractor={(item) => item.listingId}
-            showsHorizontalScrollIndicator={false}
-            horizontal={true}
-          />
-        )}
-      </View>
-      <HomeHeading headingText="Popular Destination" btnText="View All" />
-      <Modal animationType="slide" visible={modalVisible} transparent={true}>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Apply Filter</Text>
-
-          <View>
-            <View style={styles.detailRow}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.title}>No.of guests: </Text>
-              </View>
-              <View style={styles.guestContainer}>
-                <View style={styles.actions}>
-                  <TouchableOpacity
-                    style={styles.btnContainer}
-                    onPress={decrementGuestsHandler}
-                  >
-                    <AntDesign
-                      name="minus"
-                      size={24}
-                      color={COLORS.iconsLightGrey}
-                    />
-                  </TouchableOpacity>
-                  <Feather name="user" size={35} color={COLORS.primaryGreen} />
-                  <TouchableOpacity
-                    style={styles.btnContainer}
-                    onPress={incrementGuestHandler}
-                  >
-                    <AntDesign
-                      name="plus"
-                      size={24}
-                      color={COLORS.iconsLightGrey}
-                    />
-                  </TouchableOpacity>
-                </View>
-                <Text style={styles.txt}>{guests} Guests</Text>
-              </View>
-            </View>
-          </View>
-          <View>
-            <View style={styles.detailRow}>
-              <View style={styles.titleContainer}>
-                <Text style={styles.title}>Price range: </Text>
-              </View>
-              <View
-                style={{
-                  width: 150,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={styles.txt}>20</Text>
-                <View style={{ width: "100%", marginHorizontal: 4 }}>
-                  <Slider
-                    style={{ width: "100%" }}
-                    value={priceRange}
-                    onValueChange={(value) => setPriceRange(value)}
-                    maximumValue={200}
-                    minimumValue={20}
-                    thumbTintColor={COLORS.primaryGreen}
-                    trackStyle={{
-                      backgroundColor: COLORS.lightGrey,
-                    }}
-                  />
-                </View>
-
-                <Text style={styles.txt}>{Math.trunc(priceRange)}</Text>
-              </View>
-            </View>
-          </View>
-
+          <View style={styles.seperator}></View>
           <TouchableOpacity
-            style={styles.closeBtn}
             onPress={() => {
-              doneApplyFilterHandler();
+              setModalVisible(true);
+              setShowFilters(true);
             }}
           >
-            <Text style={styles.buttonText}>Done</Text>
+            <AntDesign name="filter" size={28} color={COLORS.primaryGreen} />
           </TouchableOpacity>
         </View>
-      </Modal>
+        <View>
+          <FlatList
+            data={filters}
+            renderItem={({ item }) => (
+              <View style={styles.filterContainer}>
+                <Text style={styles.filterText}>
+                  {item.label} : {item.data}
+                </Text>
+                <TouchableOpacity onPress={() => removeFilterTabHandler(item)}>
+                  <Entypo name="cross" size={24} color={COLORS.primaryGreen} />
+                </TouchableOpacity>
+              </View>
+            )}
+            keyExtractor={(item) => item.label}
+            horizontal={true}
+          />
+          {filters.length === 0 && showFilters && (
+            <Text style={styles.feedBackTxt}>No filters yet!</Text>
+          )}
+        </View>
+
+        <HomeHeading
+          headingText="Listings"
+          btnText="View All"
+          navigation={navigation}
+        />
+        <View style={styles.listings}>
+          {isLoading && (
+            <FlatList
+              data={[1, 1, 1, 1]}
+              renderItem={() => (
+                <View style={{ marginRight: 15, width: 210 }}>
+                  <ListingsSkeleton flag={true} />
+                </View>
+              )}
+              keyExtractor={() => Math.random()}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
+          {!isLoading && (
+            <FlatList
+              data={allListings}
+              renderItem={({ item }) => (
+                <View style={{ marginRight: 15, width: 210 }}>
+                  <ListingItem
+                    item={item.listingForm}
+                    navigation={navigation}
+                    id={item.listingId}
+                    allData={item}
+                  />
+                </View>
+              )}
+              keyExtractor={(item) => item.listingId}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+            />
+          )}
+        </View>
+        <HomeHeading
+          headingText="Popular Destination"
+          btnText="View All"
+          navigation={navigation}
+        />
+        <ScrollView>
+          <Destinations />
+        </ScrollView>
+        <Modal animationType="slide" visible={modalVisible} transparent={true}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>Apply Filter</Text>
+
+            <View>
+              <View style={styles.detailRow}>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>No.of guests: </Text>
+                </View>
+                <View style={styles.guestContainer}>
+                  <View style={styles.actions}>
+                    <TouchableOpacity
+                      style={styles.btnContainer}
+                      onPress={decrementGuestsHandler}
+                    >
+                      <AntDesign
+                        name="minus"
+                        size={24}
+                        color={COLORS.iconsLightGrey}
+                      />
+                    </TouchableOpacity>
+                    <Feather
+                      name="user"
+                      size={35}
+                      color={COLORS.primaryGreen}
+                    />
+                    <TouchableOpacity
+                      style={styles.btnContainer}
+                      onPress={incrementGuestHandler}
+                    >
+                      <AntDesign
+                        name="plus"
+                        size={24}
+                        color={COLORS.iconsLightGrey}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.txt}>{guests} Guests</Text>
+                </View>
+              </View>
+            </View>
+            <View>
+              <View style={styles.detailRow}>
+                <View style={styles.titleContainer}>
+                  <Text style={styles.title}>Price range: </Text>
+                </View>
+                <View
+                  style={{
+                    width: 150,
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.txt}>20</Text>
+                  <View style={{ width: "100%", marginHorizontal: 4 }}>
+                    <Slider
+                      style={{ width: "100%" }}
+                      value={priceRange}
+                      onValueChange={(value) => setPriceRange(value)}
+                      maximumValue={200}
+                      minimumValue={20}
+                      thumbTintColor={COLORS.primaryGreen}
+                      trackStyle={{
+                        backgroundColor: COLORS.lightGrey,
+                      }}
+                    />
+                  </View>
+
+                  <Text style={styles.txt}>{Math.trunc(priceRange)}</Text>
+                </View>
+              </View>
+            </View>
+
+            <TouchableOpacity
+              style={styles.closeBtn}
+              onPress={() => {
+                doneApplyFilterHandler();
+              }}
+            >
+              <Text style={styles.buttonText}>Done</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -253,6 +269,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flex: 1,
     paddingHorizontal: 15,
+    marginBottom: 50,
   },
   serachContainer: {
     flexDirection: "row",
