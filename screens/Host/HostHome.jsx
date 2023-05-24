@@ -24,8 +24,8 @@ const HostHome = () => {
               <ListingItem
                 flag={true}
                 item={item.listingForm}
-                // navigation={navigation}
                 id={item.listingId}
+                hostMode={true}
               />
             )}
             keyExtractor={(item) => item.listingId}
@@ -57,5 +57,6 @@ const styles = StyleSheet.create({
   listings: {
     flex: 1,
     paddingHorizontal: 20,
+    marginBottom: 40,
   },
 });

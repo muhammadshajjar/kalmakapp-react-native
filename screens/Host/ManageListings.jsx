@@ -17,7 +17,7 @@ const ManageListings = ({ navigation }) => {
       <FlatList
         data={myListings}
         renderItem={({ item }) => (
-          <ListingItem flag={true} item={item.listingForm} />
+          <ListingItem flag={true} item={item.listingForm} hostMode={true} />
         )}
         keyExtractor={(item) => Math.random().toString()}
         showsVerticalScrollIndicator={false}

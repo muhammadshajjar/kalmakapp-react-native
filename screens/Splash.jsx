@@ -18,12 +18,11 @@ const Splash = ({ navigation }) => {
       source={require("../assets/images/Bg.png")}
       style={{ flex: 1 }}
     >
-      <SafeAreaView>
-        <Image
-          style={{ marginTop: 40, marginLeft: 15 }}
-          source={require("../assets/images/kalmaklogo.png")}
-        />
-      </SafeAreaView>
+      <Image
+        style={{ marginTop: 50, marginLeft: 15 }}
+        source={require("../assets/images/kalmaklogo.png")}
+      />
+
       <View style={styles.container}>
         <Text style={styles.heroText}>
           find {"\n"}

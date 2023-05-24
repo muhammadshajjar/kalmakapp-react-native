@@ -34,9 +34,9 @@ export default ListSpacesItem;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: COLORS.lightGreyBorder,
-    width: 160,
+    width: 165,
     height: 130,
     justifyContent: "center",
     borderRadius: 5,
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   selected: {
-    borderColor: "blue",
+    borderColor: COLORS.primaryGreen,
   },
 });

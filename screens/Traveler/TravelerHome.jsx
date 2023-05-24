@@ -83,51 +83,52 @@ const TravelerHome = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <GreetingHeader userName="Zeeshan" />
-        <View style={styles.serachContainer}>
-          <TouchableOpacity onPress={() => submitSearchResultHandler()}>
-            <AntDesign name="search1" size={24} color={COLORS.iconsLightGrey} />
-          </TouchableOpacity>
-          <TextInput
-            style={styles.serachInput}
-            placeholder="Search Destination"
-            onSubmitEditing={submitSearchResultHandler}
-            onChangeText={(text) => setSearchDistination(text.toLowerCase())}
-            autoComplete={false}
-            autoCapitalize={false}
-          />
-          <View style={styles.seperator}></View>
-          <TouchableOpacity
-            onPress={() => {
-              setModalVisible(true);
-              setShowFilters(true);
-            }}
-          >
-            <AntDesign name="filter" size={28} color={COLORS.primaryGreen} />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <FlatList
-            data={filters}
-            renderItem={({ item }) => (
-              <View style={styles.filterContainer}>
-                <Text style={styles.filterText}>
-                  {item.label} : {item.data}
-                </Text>
-                <TouchableOpacity onPress={() => removeFilterTabHandler(item)}>
-                  <Entypo name="cross" size={24} color={COLORS.primaryGreen} />
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={(item) => item.label}
-            horizontal={true}
-          />
-          {filters.length === 0 && showFilters && (
-            <Text style={styles.feedBackTxt}>No filters yet!</Text>
-          )}
-        </View>
+      <GreetingHeader userName="Zeeshan" />
 
+      <View style={styles.serachContainer}>
+        <TouchableOpacity onPress={() => submitSearchResultHandler()}>
+          <AntDesign name="search1" size={24} color={COLORS.iconsLightGrey} />
+        </TouchableOpacity>
+        <TextInput
+          style={styles.serachInput}
+          placeholder="Search Destination"
+          onSubmitEditing={submitSearchResultHandler}
+          onChangeText={(text) => setSearchDistination(text.toLowerCase())}
+          autoComplete={false}
+          autoCapitalize={false}
+        />
+        <View style={styles.seperator}></View>
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+            setShowFilters(true);
+          }}
+        >
+          <AntDesign name="filter" size={28} color={COLORS.primaryGreen} />
+        </TouchableOpacity>
+      </View>
+
+      <View>
+        <FlatList
+          data={filters}
+          renderItem={({ item }) => (
+            <View style={styles.filterContainer}>
+              <Text style={styles.filterText}>
+                {item.label} : {item.data}
+              </Text>
+              <TouchableOpacity onPress={() => removeFilterTabHandler(item)}>
+                <Entypo name="cross" size={24} color={COLORS.primaryGreen} />
+              </TouchableOpacity>
+            </View>
+          )}
+          keyExtractor={(item) => item.label}
+          horizontal={true}
+        />
+        {filters.length === 0 && showFilters && (
+          <Text style={styles.feedBackTxt}>No filters yet!</Text>
+        )}
+      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <HomeHeading
           headingText="Listings"
           btnText="View All"

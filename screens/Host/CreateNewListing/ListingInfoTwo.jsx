@@ -21,6 +21,11 @@ const ListingInfoTwo = ({ navigation }) => {
         <Text style={styles.title}>What kind of space do you have?</Text>
         <View style={styles.spacesContainer}>
           <FlatList
+            contentContainerStyle={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
             data={SPACES}
             renderItem={({ item }) => (
               <ListSpacesItem name={item.name} icon={item.icon} id={item.id} />
@@ -55,8 +60,6 @@ const styles = StyleSheet.create({
   },
   spacesContainer: {
     flex: 1,
-    flexDirection: "row",
-    flexWrap: "nowrap",
     marginTop: 20,
   },
   selectedSpace: {
