@@ -94,8 +94,6 @@ const TravelerHome = ({ navigation }) => {
           placeholder="Search Destination"
           onSubmitEditing={submitSearchResultHandler}
           onChangeText={(text) => setSearchDistination(text.toLowerCase())}
-          autoComplete={false}
-          autoCapitalize={false}
         />
         <View style={styles.seperator}></View>
         <TouchableOpacity

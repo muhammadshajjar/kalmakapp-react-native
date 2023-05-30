@@ -336,6 +336,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderTopLeftRadius: 11,
     borderTopRightRadius: 11,
+    borderWidth: 0.5,
+    borderColor: COLORS.lightGreyBorder,
   },
   regularTxt: {
     fontFamily: "Montserrat-Regular",

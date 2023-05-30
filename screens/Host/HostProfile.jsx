@@ -6,14 +6,12 @@ import { AntDesign } from "@expo/vector-icons";
 import { AuthContext } from "../../store/auth-context";
 import { useDispatch } from "react-redux";
 import { resetState } from "../../store/redux/user-slice";
-import { resetAllListings } from "../../store/redux/allListings-slice";
 
 const HostProfile = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(resetState());
-    dispatch(resetAllListings());
     authCtx.logout();
   };
   return (

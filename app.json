@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Kalmak",
-    "slug": "Kalmak",
+    "name": "kalmak-app",
+    "slug": "kalmak-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
