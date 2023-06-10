@@ -1,21 +1,23 @@
 {
   "expo": {
-    "name": "kalmak-app",
-    "slug": "kalmak-app",
+    "name": "Kalmak",
+    "slug": "kalmak",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/custom-splash.jpg",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#f9f9f9"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -27,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "ab15c686-e2bb-456d-ac85-d42650725056"
+        "projectId": "bee6f924-033f-4d08-9cd5-f6b6c44ecc07"
       }
     }
   }
